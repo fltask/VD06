@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заполнение анкеты</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+          integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+</head>
+<body>
+<nav class="navbar navbar-light bg-light mb-4">
+  <div class="container">
+    <span class="navbar-brand mb-0 h1">Анкетирование</span>
+  </div>
+</nav>
+
+<div class="container">
+    <!-- Форма заполнения -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-body">
+            <h1 class="card-title mb-4">Заполните анкету</h1>
+            <form action="/" method="post">
+                <div class="row mb-3">
+                    <label for="name" class="col-sm-2 col-form-label text-end">Имя</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="city" class="col-sm-2 col-form-label text-end">Город</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="city" name="city" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="hobby" class="col-sm-2 col-form-label text-end">Хобби</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="hobby" name="hobby" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <label for="age" class="col-sm-2 col-form-label text-end">Возраст</label>
+                    <div class="col-sm-3">
+                        <input type="number" id="age" name="age" class="form-control" required min="1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8 text-end">
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Список анкет -->
+    <h2 class="mb-4">Отправленные анкеты</h2>
+    <div class="row">
+        {% for anketa in ankets %}
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ anketa.name }}</h5>
+                        <p class="card-text mb-1"><i class="bi bi-geo-alt-fill me-2"></i>{{ anketa.city }}</p>
+                        <p class="card-text mb-1"><i class="bi bi-heart-fill me-2"></i>{{ anketa.hobby }}</p>
+                        <p class="card-text"><i class="bi bi-person-fill me-2"></i>{{ anketa.age }} лет</p>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-muted">Анкет пока нет.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+</body>
+</html>
